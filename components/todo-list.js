@@ -5,7 +5,11 @@ export class TodoList extends Component {
     tasks;
     constructor() {
         super();
-        this.tasks = [];
+        this.storeName = 'tasks';
+
+        this.tasks = localStorage.getItem(this.storeName)
+            ? JSON.parse(localStorage.getItem(this.storeName))
+            : [];
         this.template = this.generateTemplate();
         this.render('#tasks');
         this.manageComponent();
@@ -35,6 +39,7 @@ export class TodoList extends Component {
         element.querySelector('form').addEventListener('submit', (ev) => {
             ev.preventDefault();
             this.tasks.push(element.querySelector('input').value);
+            localStorage.setItem(this.storeName, JSON.stringify(this.tasks));
             element.querySelector('input').value = '';
             this.template = this.generateTemplate();
             this.render('#tasks');
