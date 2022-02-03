@@ -4,4 +4,5 @@ export class Component {
         const element = document.querySelector(selector);
         element.outerHTML = this.template;
     }
+    generateTemplate() {}
 }

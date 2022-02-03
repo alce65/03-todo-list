@@ -3,24 +3,17 @@ import { Component } from './component.js';
 export class TodoList extends Component {
     template;
     tasks;
-    constructor() {
+    constructor(tasks) {
         super();
-        this.storeName = 'tasks';
-
-        this.tasks = localStorage.getItem(this.storeName)
-            ? JSON.parse(localStorage.getItem(this.storeName))
-            : [];
+        this.tasks = tasks;
         this.template = this.generateTemplate();
         this.render('#tasks');
-        this.manageComponent();
+        // this.manageComponent();
     }
     generateTemplate() {
         let template = `
             <div id="tasks">
-                <form>
-                    <input type="text" id="new-tarea" placeholder="Add tarea">
-                    <button type="submit">Add</button>
-                </form>
+                <div id="add-task"></div>
                 <h3>
                     Lista de tareas
                 </h3>
@@ -33,17 +26,5 @@ export class TodoList extends Component {
             </div>
         `;
         return template;
-    }
-    manageComponent() {
-        const element = document.querySelector('#tasks');
-        element.querySelector('form').addEventListener('submit', (ev) => {
-            ev.preventDefault();
-            this.tasks.push(element.querySelector('input').value);
-            localStorage.setItem(this.storeName, JSON.stringify(this.tasks));
-            element.querySelector('input').value = '';
-            this.template = this.generateTemplate();
-            this.render('#tasks');
-            this.manageComponent();
-        });
     }
 }
