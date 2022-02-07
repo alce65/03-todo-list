@@ -1,6 +1,8 @@
 import { Footer } from '../components/footer.js';
 import { Header } from '../components/header.js';
 import { Menu } from '../components/menu.js';
+// eslint-disable-next-line no-unused-vars
+import { VCard } from '../components/v-card.js';
 
 (() => {
     const main = () => {
